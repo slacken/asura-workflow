@@ -25,7 +25,7 @@ jobs:
         run: |
           bundle exec rake asura:run
         env:
-          BUNDLE_GITHUB__COM: ${{ secrets.GITHUB_TOKEN }}:x-oauth-basic
+          BUNDLE_GITHUB__COM: ${{ secrets.OAUTH_TOKEN }}:x-oauth-basic
           S3_SECRET_ID: ${{ secrets.S3_SECRET_ID }}
           S3_SECRET_KEY: ${{ secrets.S3_SECRET_KEY }}
           S3_REGION: ap-shanghai
