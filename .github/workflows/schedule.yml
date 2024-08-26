@@ -18,9 +18,6 @@ jobs:
         with:
           ruby-version: '3.3'
           bundler-cache: true
-      - name: Install dependencies
-        run: |
-          bundle install
         env:
           BUNDLE_GITHUB__COM: x-access-token:${{ secrets.OAUTH_TOKEN }}
       - name: Run Asura Schedule hourly
