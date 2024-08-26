@@ -1,0 +1,33 @@
+name: Asura Schedule
+
+on:
+  schedule:
+    - cron: '11 * * * *' # Runs at 35 minutes past every hour
+  workflow_dispatch:
+
+jobs:
+  run:
+    # if: contains(github.event.schedule, '11 * * * *')
+    runs-on: ubuntu-24.04
+    needs: []
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@78c01b705fd9d5ad960d432d3a0cfa341d50e410 # v1.179.1
+        with:
+          ruby-version: '3.3'
+          bundler-cache: true
+      - name: Install dependencies
+        run: |
+          bundle install
+      - name: Run Asura Schedule hourly
+        run: |
+          bundle exec rake asura:run
+        env:
+          BUNDLE_GITHUB__COM: ${{ secrets.GITHUB_TOKEN }}:x-oauth-basic
+          S3_SECRET_ID: ${{ secrets.S3_SECRET_ID }}
+          S3_SECRET_KEY: ${{ secrets.S3_SECRET_KEY }}
+          S3_REGION: ap-shanghai
+          S3_ENDPOINT: https://cos.ap-shanghai.myqcloud.com
+          S3_BUCKET: asura-1305493000
