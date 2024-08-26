@@ -19,7 +19,7 @@ jobs:
           ruby-version: '3.3'
           bundler-cache: true
         env:
-          BUNDLE_GITHUB__COM: x-access-token:${{ secrets.OAUTH_TOKEN }}
+          BUNDLE_GITHUB__COM: ${{ secrets.OAUTH_TOKEN }}:x-oauth-basic
       - name: Run Asura Schedule hourly
         run: |
           bundle exec rake asura:run
